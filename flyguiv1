@@ -6,6 +6,7 @@ local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
+-- Main GUI
 local mainGui = Instance.new("ScreenGui")
 mainGui.Name = "MainGui"
 mainGui.ResetOnSpawn = false
@@ -13,14 +14,19 @@ mainGui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
 frame.Parent = mainGui
-frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
-frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+frame.BackgroundColor3 = Color3.fromRGB(200, 160, 255) -- โทนม่วง
+frame.BorderSizePixel = 0
 frame.Position = UDim2.new(0.1, 0, 0.38, 0)
 frame.Size = UDim2.new(0, 190, 0, 57)
 frame.Active = true
 frame.Draggable = true
 
--- UI Elements
+-- ใส่มุมโค้งมน
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = frame
+
+-- ฟังก์ชันสร้างปุ่ม
 local function createButton(name, parent, pos, size, color, text, textSize)
     local button = Instance.new("TextButton")
     button.Name = name
@@ -28,14 +34,21 @@ local function createButton(name, parent, pos, size, color, text, textSize)
     button.BackgroundColor3 = color
     button.Position = pos
     button.Size = size
-    button.Font = Enum.Font.SourceSans
+    button.Font = Enum.Font.GothamBold
     button.Text = text
-    button.TextColor3 = Color3.new(0, 0, 0)
+    button.TextColor3 = Color3.new(1, 1, 1)
     button.TextSize = textSize or 14
     button.TextWrapped = true
+    button.BorderSizePixel = 0
+
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 8)
+    btnCorner.Parent = button
+
     return button
 end
 
+-- ฟังก์ชันสร้าง Label
 local function createLabel(name, parent, pos, size, color, text)
     local label = Instance.new("TextLabel")
     label.Name = name
@@ -43,25 +56,36 @@ local function createLabel(name, parent, pos, size, color, text)
     label.BackgroundColor3 = color
     label.Position = pos
     label.Size = size
-    label.Font = Enum.Font.SourceSans
+    label.Font = Enum.Font.GothamBold
     label.Text = text
-    label.TextColor3 = Color3.new(0, 0, 0)
+    label.TextColor3 = Color3.new(1, 1, 1)
     label.TextScaled = true
+    label.BorderSizePixel = 0
+
+    local lblCorner = Instance.new("UICorner")
+    lblCorner.CornerRadius = UDim.new(0, 8)
+    lblCorner.Parent = label
+
     return label
 end
 
-local up = createButton("Up", frame, UDim2.new(0, 0, 0, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(79, 255, 152), "ขึ้น")
-local down = createButton("Down", frame, UDim2.new(0, 0, 0.5, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(215, 255, 121), "ลง")
-local onoff = createButton("OnOff", frame, UDim2.new(0.7, 0, 0.5, 0), UDim2.new(0, 56, 0, 28), Color3.fromRGB(255, 249, 74), "บิน")
-local plus = createButton("Plus", frame, UDim2.new(0.23, 0, 0, 0), UDim2.new(0, 45, 0, 28), Color3.fromRGB(133, 145, 255), "+")
-local minus = createButton("Minus", frame, UDim2.new(0.23, 0, 0.5, 0), UDim2.new(0, 45, 0, 28), Color3.fromRGB(123, 255, 247), "-")
-local closeButton = createButton("Close", frame, UDim2.new(0, 0, -1, 27), UDim2.new(0, 45, 0, 28), Color3.fromRGB(225, 25, 0), "ปิด", 24)
-local minimize = createButton("Minimize", frame, UDim2.new(0, 44, -1, 27), UDim2.new(0, 45, 0, 28), Color3.fromRGB(192, 150, 230), "-", 30)
-local minimize2 = createButton("Minimize2", frame, UDim2.new(0, 44, -1, 57), UDim2.new(0, 45, 0, 28), Color3.fromRGB(192, 150, 230), "+", 30)
+-- ปุ่มต่าง ๆ (สีโทนม่วง)
+local up = createButton("Up", frame, UDim2.new(0, 0, 0, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(180, 130, 255), "ขึ้น")
+local down = createButton("Down", frame, UDim2.new(0, 0, 0.5, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(170, 110, 255), "ลง")
+local onoff = createButton("OnOff", frame, UDim2.new(0.7, 0, 0.5, 0), UDim2.new(0, 56, 0, 28), Color3.fromRGB(160, 90, 255), "บิน")
+local plus = createButton("Plus", frame, UDim2.new(0.23, 0, 0, 0), UDim2.new(0, 45, 0, 28), Color3.fromRGB(190, 150, 255), "+")
+local minus = createButton("Minus", frame, UDim2.new(0.23, 0, 0.5, 0), UDim2.new(0, 45, 0, 28), Color3.fromRGB(190, 150, 255), "-")
+local closeButton = createButton("Close", frame, UDim2.new(0, 0, -1, 27), UDim2.new(0, 45, 0, 28), Color3.fromRGB(220, 80, 255), "ปิด", 24)
+local minimize = createButton("Minimize", frame, UDim2.new(0, 44, -1, 27), UDim2.new(0, 45, 0, 28), Color3.fromRGB(150, 50, 255), "-", 30)
+local minimize2 = createButton("Minimize2", frame, UDim2.new(0, 44, -1, 57), UDim2.new(0, 45, 0, 28), Color3.fromRGB(150, 50, 255), "+", 30)
 minimize2.Visible = false
 
-local titleLabel = createLabel("Title", frame, UDim2.new(0.47, 0, 0, 0), UDim2.new(0, 100, 0, 28), Color3.fromRGB(242, 60, 255), "สคริปต์บิน By:คิว")
-local speedLabel = createLabel("SpeedLabel", frame, UDim2.new(0.47, 0, 0.5, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(255, 85, 0), "1")
+local titleLabel = createLabel("Title", frame, UDim2.new(0.47, 0, 0, 0), UDim2.new(0, 100, 0, 28), Color3.fromRGB(220, 80, 255), "สคริปต์บิน By:คิว")
+local speedLabel = createLabel("SpeedLabel", frame, UDim2.new(0.47, 0, 0.5, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(220, 80, 255), "1")
+
+-- (จากตรงนี้ใช้โค้ดเดิมของคุณได้เลย สำหรับระบบบิน, ปุ่ม, และเชื่อมต่อ event ต่าง ๆ)
+
+
 
 -- Variables
 local flying = false
