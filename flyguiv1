@@ -21,12 +21,10 @@ frame.Size = UDim2.new(0, 190, 0, 57)
 frame.Active = true
 frame.Draggable = true
 
--- ใส่มุมโค้งมน
 local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 12)
 corner.Parent = frame
 
--- ฟังก์ชันสร้างปุ่ม
 local function createButton(name, parent, pos, size, color, text, textSize)
     local button = Instance.new("TextButton")
     button.Name = name
@@ -48,7 +46,6 @@ local function createButton(name, parent, pos, size, color, text, textSize)
     return button
 end
 
--- ฟังก์ชันสร้าง Label
 local function createLabel(name, parent, pos, size, color, text)
     local label = Instance.new("TextLabel")
     label.Name = name
