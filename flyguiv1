@@ -66,7 +66,6 @@ local function createLabel(name, parent, pos, size, color, text)
     return label
 end
 
--- ปุ่มต่าง ๆ (สีโทนม่วง)
 local up = createButton("Up", frame, UDim2.new(0, 0, 0, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(180, 130, 255), "ขึ้น")
 local down = createButton("Down", frame, UDim2.new(0, 0, 0.5, 0), UDim2.new(0, 44, 0, 28), Color3.fromRGB(170, 110, 255), "ลง")
 local onoff = createButton("OnOff", frame, UDim2.new(0.7, 0, 0.5, 0), UDim2.new(0, 56, 0, 28), Color3.fromRGB(160, 90, 255), "บิน")
